@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: chat-reativo
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/chat_reativo}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
