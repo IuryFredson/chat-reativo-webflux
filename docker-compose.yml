@@ -2,16 +2,13 @@ services:
   mongo:
     image: mongo:7
     container_name: chat-reativo-mongo
-    ports:
-      - "27017:27017"
+    command: ["mongod", "--setParameter", "diagnosticDataCollectionEnabled=false"]
     volumes:
       - mongo-data:/data/db
 
   redis:
     image: redis:7-alpine
     container_name: chat-reativo-redis
-    ports:
-      - "6379:6379"
 
   backend:
     build:
