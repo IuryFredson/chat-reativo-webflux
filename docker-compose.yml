@@ -7,14 +7,24 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  redis:
+    image: redis:7-alpine
+    container_name: chat-reativo-redis
+    ports:
+      - "6379:6379"
+
   backend:
     build:
       context: ./backend
     container_name: chat-reativo-backend
     depends_on:
       - mongo
+      - redis
     environment:
       MONGODB_URI: mongodb://mongo:27017/chat_reativo
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      PRESENCE_TTL: 45s
       CORS_ALLOWED_ORIGINS: http://localhost:5173
     ports:
       - "8080:8080"
